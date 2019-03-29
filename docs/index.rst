@@ -54,22 +54,24 @@ here are a couple of great tutorials: RPi_, Drogon_, and Hensley_. A few importa
 to note:
 
   * The Alphsense OPC-N2 is a 3v3 logic SPI Mode 1 device
-  * The OPC requires at least 250 mA, so powering directly through the RPi is not an option
+  * The OPC requires a ~1000 mA pulse to start and at least 250 mA to run, so powering through a GPIO pin is not an option
+  * The OPC should be powered through the RPi or use the same power supply, to avoid SPI ground issues
 
-To connect the RPi to the OPC-N2, there are four connections that must be made, plus ground and power. The
-power source must be 5 VDC, and should power both the OPC and the RPi to avoid ground issues. The connections
-are stated below:
+To connect the RPi to the OPC-N2, there are four connections that must be made, plus ground and power. Use a
+quality 5 VDC/2.5 A power source with the RPi for best results. The connections are stated below:
 
 =====  ====================  ===== ==========
  Pin   Function              OPC   RPi
 =====  ====================  ===== ==========
-1      5 VDC                 VCC    -
-2      Serial Clock          SCK   CLK
+1      5 VDC                 VCC   5V
+2      Serial Clock          SCK   SCLK
 3      Master In Slave Out   SDO   MISO
 4      Master Out Slave In   SDI   MOSI
 5      Chip Select           /SS   CE0 or CE1
-6      Ground                GND    -
+6      Ground                GND   G
 =====  ====================  ===== ==========
+
+RPi pinouts can be viewed on https://pinout.xyz
 
 .. _RPi: https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/
 .. _Drogon: https://projects.drogon.net/understanding-spi-on-the-raspberry-pi/
